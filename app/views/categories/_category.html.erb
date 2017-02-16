@@ -1,0 +1,29 @@
+<article class="category">
+  <header>
+    <%= link_to category do %>
+      <h4><%= category.name %></h4>
+    <% end %>
+  </header>
+  <p class="description">
+    <%= category.description %>
+  </p>
+  <footer class="actions">
+    <%= link_to add_item_cart_path(category_id: category.id), class: 'btn btn-primary', method: :put do %>
+      <%= fa_icon "shopping-cart", text: 'Add' %>
+    <% end %>
+    <%= link_to category, class: 'btn btn-default pull-right' do %>
+      Details &raquo;
+    <% end %>
+  </footer>
+
+  <aside class="price">
+    <%= humanized_money_with_symbol category.price %>
+  </aside>
+
+  <% if category.quantity == 0 %>
+    <aside class="sold-out">
+      Sold Out!
+    </aside>
+  <% end %>
+
+</article>
