@@ -14,4 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
+//= require_tree
+
+// Maybe work on this later, ajax form submission check.
+// $(function (){
+//   $('form[data-remote=true]').on 'ajax:success', (e, data, status, xhr) ->
+//     if isHTML(data)
+//       thisForm = "form[id=#{@getAttribute('id')}]"
+//       $(thisForm).replaceWith $(data).find(thisForm)
+// })
