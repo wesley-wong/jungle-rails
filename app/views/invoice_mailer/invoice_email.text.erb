@@ -1,0 +1,12 @@
+Thanks for your order!
+Sample mail sent using smtp.
+Your order:
+<% @order_total = 0 %>
+<% @order.line_items.each do |item| %>
+<%= item.product.name %>
+<%= item.product.description %>
+Quantity: <%= item.quantity %><% @price = item.item_price_cents.to_f * item.quantity.to_f / 100 %>
+$<%= @price %>
+<% @order_total += @price %>
+<% end %>
+Total Price $<%= @order_total %>

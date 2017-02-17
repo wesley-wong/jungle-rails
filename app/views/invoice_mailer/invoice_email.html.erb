@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thanks you for your order! </h1>
+
+  <div>
+    <div >
+    <table >
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_total = 0 %>
+        <% @order.line_items.each do |item| %>
+          <tr>
+      <td>
+        <%= image_tag item.product.image.tiny, class: 'main-img' %>
+      </td>
+      <td>
+        <strong><%= item.product.name %></strong>
+        <br>
+        <%= item.product.description %>
+      </td>
+      <td>
+        <%= item.quantity %>
+      </td>
+      <td>
+        <% price = item.item_price_cents.to_f * item.quantity.to_f / 100 %>
+        $<%= price %>
+        <% @order_total += price %>
+      </td>
+    </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>
+            TOTAL:
+          </th>
+          <th>
+            $<%= @order_total.round(2) %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  </body>
+</html>
