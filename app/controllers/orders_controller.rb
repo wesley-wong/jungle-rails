@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
+      # ExampleMailer.sample_email(@order).deliver
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, error: order.errors.full_messages.first
@@ -53,6 +54,7 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
+      # InvoiceMailer.invoice_email(@order).deliver
     order
   end
 
