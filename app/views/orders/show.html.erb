@@ -8,13 +8,14 @@
     <h4>Thank you for your order!</h4>
     <h5>
       <em>Email sent to <%= @order.email %></em>
+      <a href='http://localhost:3000/rails/mailers/invoice_mailer/invoice_mail_preview'>Temporary Email preview link </a>
     </h5>
     <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
         <tr>
           <th colspan="2">Product</th>
-          <th>Unit Price</th>
+          <th>Description</th>
           <th>Quantity</th>
           <th>Price</th>
         </tr>
