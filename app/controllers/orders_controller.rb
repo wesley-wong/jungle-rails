@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
-      # InvoiceMailer.invoice_email(@order).deliver
+      InvoiceMailer.invoice_email(order).deliver_later
     order
   end
 
