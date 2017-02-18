@@ -1,0 +1,234 @@
+<section class='comments-show'>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="rating-block">
+        <h4>Average user rating</h4>
+
+        <!-- Average User Rating -->
+        <% @total_rating = 0 %>
+
+        <% @rating_count = 0 %>
+        <% @five_star_count = 0 %>
+        <% @four_star_count = 0 %>
+        <% @three_star_count = 0 %>
+        <% @two_star_count = 0 %>
+        <% @one_star_count = 0 %>
+
+        <% @reviews.each do |rev| %>
+          <% @total_rating += rev.rating %>
+          <% @rating_count += 1 %>
+          <% if rev.rating == 5 then @five_star_count += 1 end %>
+          <% if rev.rating == 4 then @four_star_count += 1 end %>
+          <% if rev.rating == 3 then @three_star_count += 1 end %>
+          <% if rev.rating == 2 then @two_star_count += 1 end %>
+          <% if rev.rating == 1 then @one_star_count += 1 end %>
+        <% end %>
+
+        <% @five_star_avg = (@five_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @four_star_avg = (@four_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @three_star_avg = (@three_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @two_star_avg = (@two_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @one_star_avg = (@one_star_count.to_f / @rating_count.to_f) * 100 %>
+
+        <% @average_rating = @total_rating.to_f /  @reviews.length.to_f %>
+
+        <% @average_rating_int = @average_rating.to_i %>
+        <% @empty_starts = 5 - @average_rating_int %>
+
+        <h2 class="bold padding-bottom-7">
+
+          <%= @average_rating.round(1) %>
+          <small>/ 5</small>
+        </h2>
+
+        <% @average_rating_int.times do %>
+          <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+        <% end %>
+        <% @empty_starts.times do %>
+          <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </button>
+        <% end %>
+      </div>
+    </div>
+      <div class="col-sm-6">
+        <h4>Rating breakdown</h4>
+        <div class="pull-left">
+          <div class="pull-left" style="width:35px; line-height:1;">
+
+            <div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+          </div>
+          <div class="pull-left" style="width:180px;">
+            <div class="progress" style="height:9px; margin:8px 0;">
+
+              <!-- 5 star progress bar -->
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"
+              style="width: <%= @five_star_avg %>%">
+              </div>
+            </div>
+          </div>
+
+          <!-- # of 5 star ratings -->
+          <div class="pull-right" style="margin-left:10px;">
+            <%= @five_star_count %>
+          </div>
+        </div>
+        <div class="pull-left">
+          <div class="pull-left" style="width:35px; line-height:1;">
+            <div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+          </div>
+          <div class="pull-left" style="width:180px;">
+            <div class="progress" style="height:9px; margin:8px 0;">
+
+              <!-- 4 star progress bar -->
+              <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"
+               style="width: <%= @four_star_avg %>%">
+              </div>
+            </div>
+          </div>
+
+          <!-- # of 4 star ratings -->
+          <div class="pull-right" style="margin-left:10px;">
+            <%= @four_star_count %>
+          </div>
+        </div>
+        <div class="pull-left">
+          <div class="pull-left" style="width:35px; line-height:1;">
+            <div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+          </div>
+          <div class="pull-left" style="width:180px;">
+            <div class="progress" style="height:9px; margin:8px 0;">
+
+              <!-- 3 star progress bar -->
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5"
+              style="width: <%= @three_star_avg %>%">
+              </div>
+            </div>
+          </div>
+
+          <!-- # of 3 star ratings -->
+          <div class="pull-right" style="margin-left:10px;">
+            <%= @three_star_count %>
+          </div>
+        </div>
+        <div class="pull-left">
+          <div class="pull-left" style="width:35px; line-height:1;">
+            <div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+          </div>
+          <div class="pull-left" style="width:180px;">
+            <div class="progress" style="height:9px; margin:8px 0;">
+
+              <!-- 2 star progress bar -->
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5"
+              style="width: <%= @two_star_avg %>%">
+              </div>
+            </div>
+          </div>
+
+          <!-- # of Two star ratings -->
+          <div class="pull-right" style="margin-left:10px;">
+            <%= @two_star_count %>
+          </div>
+        </div>
+        <div class="pull-left">
+          <div class="pull-left" style="width:35px; line-height:1;">
+            <div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+          </div>
+          <div class="pull-left" style="width:180px;">
+            <div class="progress" style="height:9px; margin:8px 0;">
+
+              <!-- 1 star progress bar -->
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"
+              style="width: <%= @one_star_avg %>%">
+              <span class="sr-only">0% Complete (danger)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Number of 1 star ratings -->
+          <div class="pull-right" style="margin-left:10px;">
+            <%= @one_star_count %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="row" style="margin-top:40px;">
+    <div class="col-md-6">
+      <div class="well well-sm">
+            <div class="text-right">
+                <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+            </div>
+
+            <div class="row" id="post-review-box" style="display:none;">
+                <div class="col-md-12">
+                    <form accept-charset="UTF-8" action="" method="post">
+                        <input id="ratings-hidden" name="rating" type="hidden">
+                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
+
+                        <div class="text-right">
+                            <div class="stars starrr pull-left" data-rating="0"></div>
+                            <div style='padding-top: 20px'>
+                              <a class="btn btn-link btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                                Cancel
+                              </a>
+                              <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <hr/>
+
+        <!-- Begin loop for all reviews here -->
+        <% @reviews.each do |review| %>
+        <div class="review-block">
+          <div class="row">
+            <div class="col-sm-2">
+              <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+              <div class="review-block-name">
+                <%= review.user.first_name %>
+              </div>
+              <!-- Time created -->
+              <div class="review-block-date">
+                <%= time_ago_in_words review.created_at %> ago
+              </div>
+            </div>
+            <div class="col-sm-10">
+
+              <!-- Make stars depending on rating -->
+              <div class="review-block-rate">
+                <% review.rating.times do %>
+                  <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                  </button>
+                <% end %>
+
+                <% @blank_stars = 5-review.rating %>
+                <% @blank_stars.times do %>
+                  <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                  </button>
+                <% end %>
+              </div>
+              <div class="review-block-description">
+                <%= review.description %>
+                </div>
+            </div>
+
+          </div>
+        </div>
+        <hr>
+        <% end %>
+
+      </div>
+    </div>
+
+</section>
