@@ -29,7 +29,13 @@
   </article>
   <hr>
 </section>
+
+
 <% if !@reviews[0].nil? %>
   <%= render 'review' %>
+  <%= render 'review_form' %>
+  <%= render 'review_loop' %>
+<% else %>
+  <%= render 'review_form' %>
 <% end %>
 
