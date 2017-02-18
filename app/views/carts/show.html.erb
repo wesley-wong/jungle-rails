@@ -4,6 +4,8 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if cart.present? %>
+
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -16,6 +18,7 @@
       </thead>
       <tbody>
         <% @cart_total = 0 %>
+
         <% cart.each do |product_id, details| %>
           <%= render 'item', product_id: product_id, details: details %>
         <% end %>
@@ -49,5 +52,14 @@
       <% end %>
     </div>
   </div>
+
+  <% else %>
+    <div class="alert alert-danger">
+      <strong>
+        <%= link_to "Cart is empty!", '/' %>
+      </strong>
+
+    </div>
+  <% end %>
 
 </section>
