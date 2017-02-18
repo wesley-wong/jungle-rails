@@ -61,7 +61,12 @@ $(function(){
 
   });
 
+
   $('.starrr').on('starrr:change', function(e, value){
-    ratingsField.val(value);
+    $('#review_rating').val((value));
+  });
+
+  $('.starrr').on('starrr:change', function(e, value){
+    $('#review_rating').val((value));
   });
 });
