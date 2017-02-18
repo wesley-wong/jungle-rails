@@ -27,5 +27,9 @@
     </div>
 
   </article>
-
+  <hr>
 </section>
+<% if !@reviews[0].nil? %>
+  <%= render 'review' %>
+<% end %>
+
