@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-sm-12">
+    <hr/>
+
+    <!-- Begin loop for all reviews here -->
+    <% @reviews.each do |review| %>
+    <div class="review-block">
+      <div class="row">
+        <div class="col-sm-2">
+          <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+          <div class="review-block-name">
+            <%= review.user.first_name %>
+          </div>
+          <!-- Time created -->
+          <div class="review-block-date">
+            <%= time_ago_in_words review.created_at %> ago
+          </div>
+        </div>
+        <div class="col-sm-10">
+
+          <!-- Make stars depending on rating -->
+          <div class="review-block-rate">
+            <% review.rating.times do %>
+              <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+              </button>
+            <% end %>
+
+            <% @blank_stars = 5-review.rating %>
+            <% @blank_stars.times do %>
+              <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+              </button>
+            <% end %>
+          </div>
+          <div class="review-block-description">
+            <%= review.description %>
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <hr>
+    <% end %>
+
+  </div>
+</div>
