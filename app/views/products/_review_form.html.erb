@@ -9,12 +9,25 @@
 
           <!-- User adds review here -->
           <%= form_for [@product, @review] do |form| %>
+
+            <!-- Error handling -->
+      <!--       <% if form.object.errors.any? %>
+              <div class="alert alert-danger">
+                <strong>The following errors prevented saving:</strong>
+                <ul>
+                  <% form.object.errors.full_messages.each do |error| %>
+                    <li><%= error %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %> -->
+
             <%= form.label :description %>
             <%= form.text_area :description, size:'50x5', class: 'form-control animated'  %>
 
             <%= form.number_field :rating %>
             <div style='padding-top: 20px'>
-              <%= form.submit 'Send', class: 'btn btn-primary btn-sm pull-right' %>
+              <%= form.submit 'Send', class: 'btn btn-primary btn-sm pull-right review-submit' %>
               <a class="btn btn-link btn-sm pull-right" href="#" id="close-review-box" style="display:none; margin-right: 10px;">Cancel</a>
             </div>
             <div class="text-right">
