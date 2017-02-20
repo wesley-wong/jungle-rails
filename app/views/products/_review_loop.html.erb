@@ -33,9 +33,19 @@
               </button>
             <% end %>
           </div>
+
+          <!-- Delete button -->
+          <div>
+            <% if current_user.id == review.user.id %>
+              <%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger pull-right', method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end %>
+          </div>
+
           <div class="review-block-description">
             <%= review.description %>
-            </div>
+          </div>
+
+
         </div>
 
       </div>
