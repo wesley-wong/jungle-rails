@@ -143,6 +143,14 @@ User.create!({
   password_confirmation: 'password'
 })
 
+User.create!({
+  first_name: 'Bruce',
+  last_name: 'Wayne',
+  email: 'bat@man.com',
+  password: "I'm batman",
+  password_confirmation: "I'm batman"
+})
+
 puts "Creating Comments!"
 Review.destroy_all
 
