@@ -5,7 +5,7 @@ class InvoiceMailer < ApplicationMailer
     @order = order
     mail(
       to: @order.email,
-      subject: 'Order Confirmation'
+      subject: "Order Confirmation #: #{@order.id}"
     )
   end
 
