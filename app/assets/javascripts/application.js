@@ -69,4 +69,11 @@ $(function(){
   $('.starrr').on('starrr:change', function(e, value){
     $('#review_rating').val((value));
   });
+
+  // $('.review-submit').on('click', function(e, val) {
+  //   if ($('#review_description').val() == '') {
+  //     $('form').preventDefault();
+  //     alert('Description cannot be blank');
+  //   }
+  // })
 });
