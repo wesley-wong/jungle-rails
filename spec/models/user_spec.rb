@@ -78,6 +78,9 @@ RSpec.describe User, type: :model do
         expect(@user2.errors.full_messages).to include("Email has already been taken")
       end
 
+      it 'password is longer than 3 characters' do
+
+      end
     end
   end
 end
