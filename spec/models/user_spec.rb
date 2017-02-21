@@ -79,8 +79,71 @@ RSpec.describe User, type: :model do
       end
 
       it 'password is longer than 3 characters' do
-
+        @user = User.create(
+          first_name: 'Bruce',
+          last_name: 'Wayne',
+          email: 'bat@man.com',
+          password: "b",
+          password_confirmation: "b"
+          )
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 3 characters)")
       end
+
+    end
+  end
+
+  describe '.authenticate_with_credentials' do
+    it 'should return instance of user if given valid email and password' do
+      @user = User.create(
+          first_name: 'Bruce',
+          last_name: 'Wayne',
+          email: 'bat@man.com',
+          password: "batman",
+          password_confirmation: "batman"
+          )
+      @user2 = User.authenticate_with_credentials('bat@man.com', 'batman')
+      expect(@user2).to be_an_instance_of(User)
+      expect(@user2).to eql(@user)
+    end
+
+    it 'should return false if given invalid user or password' do
+      @user = User.create(
+          first_name: 'Bruce',
+          last_name: 'Wayne',
+          email: 'bat@man.com',
+          password: "batman",
+          password_confirmation: "batman"
+          )
+      @test1 = User.authenticate_with_credentials( 'notbat@man.com', 'batman')
+      @test2 = User.authenticate_with_credentials('bat@man.com', 'notbatman')
+      expect(@test1).to be false
+      expect(@test2).to be false
+    end
+
+    it 'should still log in user if they accidentaly use caps lock' do
+      @user = User.new(
+        first_name: 'Bruce',
+        last_name: 'Wayne',
+        email: 'BAT@man.com',
+        password: "batman",
+        password_confirmation: "batman"
+        )
+      @user.email.downcase!
+      @user.save!
+      @user2 = User.authenticate_with_credentials('BAT@MAN.COM', 'batman')
+      expect(@user2).to be_an_instance_of(User)
+    end
+
+    it 'should still log in user if they accidentally add extra spaces' do
+      @user = User.create(
+        first_name: 'Bruce',
+        last_name: 'Wayne',
+        email: 'bat@man.com',
+        password: "batman",
+        password_confirmation: "batman"
+        )
+      @user2 = User.authenticate_with_credentials(' bat@man.com     ', 'batman')
+      expect(@user2).to be_an_instance_of(User)
     end
   end
 end
