@@ -20,7 +20,7 @@ RSpec.feature "User adds product to cart", type: :feature, js: true do
     visit '/'
     first('article').find('footer').first('a').click
     sleep(3)
-    save_screenshot
+    # save_screenshot
     expect(page).to have_content('My Cart (1)')
   end
 end
