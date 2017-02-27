@@ -3,6 +3,45 @@
     <%= link_to product, method: :get do %>
       <%= image_tag product.image.thumb, alt: product.name %>
       <h4><%= product.name %></h4>
+       <!-- Average User Rating -->
+        <% @total_rating = 0 %>
+
+        <% @rating_count = 0 %>
+        <% @five_star_count = 0 %>
+        <% @four_star_count = 0 %>
+        <% @three_star_count = 0 %>
+        <% @two_star_count = 0 %>
+        <% @one_star_count = 0 %>
+
+        <% product.reviews.each do |rev| %>
+          <% @total_rating += rev.rating %>
+          <% @rating_count += 1 %>
+          <% if rev.rating == 5 then @five_star_count += 1 end %>
+          <% if rev.rating == 4 then @four_star_count += 1 end %>
+          <% if rev.rating == 3 then @three_star_count += 1 end %>
+          <% if rev.rating == 2 then @two_star_count += 1 end %>
+          <% if rev.rating == 1 then @one_star_count += 1 end %>
+        <% end %>
+
+        <% @five_star_avg = (@five_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @four_star_avg = (@four_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @three_star_avg = (@three_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @two_star_avg = (@two_star_count.to_f / @rating_count.to_f) * 100 %>
+        <% @one_star_avg = (@one_star_count.to_f / @rating_count.to_f) * 100 %>
+
+        <% @average_rating = @total_rating.to_f /  product.reviews.length.to_f %>
+
+        <% if @average_rating.nan? %>
+          <% @average_rating = 0 %>
+            <small>No reviews yet</small>
+        <% else %>
+          <h2 class="bold padding-bottom-7">
+            <%= @average_rating.round(1) %><small>/ 5</small>
+          </h2>
+        <% end %>
+        <% @empty_starts = 5 %>
+
+
     <% end %>
   </header>
   <p class="description">
