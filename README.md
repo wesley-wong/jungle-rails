@@ -1,6 +1,6 @@
 # Jungle
 
-This is the project for the second week of Lighthouse Labs
+This is the project for the sixth week of Lighthouse Labs
 
 
 ### Project Description
